@@ -2,13 +2,18 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../components/HomeScreen';
-import {LoginScreen} from '../components/auth';
+import {LoginScreen, OnboardingScreen} from '../components/auth';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="onboarding"
+          options={{headerShown: false}}
+          component={OnboardingScreen}
+        />
         <Stack.Screen
           name="Login"
           options={{headerShown: false}}

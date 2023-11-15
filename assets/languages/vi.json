@@ -1,0 +1,21 @@
+{
+    "login": {
+        "email": "Email",
+        "password": "Mật khẩu",
+        "login": "Đăng nhập",
+        "or": "hoặc",
+        "sign up": "Đăng ký",
+        "dont have an account": "Chưa có tài khoản?",
+        "hello welcome back": "Chào mừng trở lại!",
+        "please login to your account": "Vui lòng đăng nhập vào tài khoản của bạn",
+        "welcome back to votio. have a good time!": "Chào mừng trở lại với votio"
+    },
+    "onboarding":{
+        "welcome to votio": "Chào mừng đến với votio",
+        "welcome to votio description": "Votio là nơi cho phép bạn để tham gia vào các cuộc bình chọn, bạn có thể tạo ra các cuộc bình chọn của riêng mình và cho phép mọi người tham gia vào cuộc bình chọn của bạn",
+        "sign up":"Đăng ký",
+        "sign in":"Đăng nhập",
+        "vote":"Bình chọn",
+        "dont have an account":"Chưa có tài khoản?"
+    }
+}

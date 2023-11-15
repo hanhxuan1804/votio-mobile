@@ -1,0 +1,21 @@
+{
+    "login":{
+        "email":"Email",
+        "password":"Password",
+        "login":"Login",
+        "or":"or",
+        "dont have an account":"Don't have an account?",
+        "sign up":"Sign up",
+        "hello welcome back":"Hello, welcome back!",
+        "please login to your account":"Please login to your account.",
+        "welcome back to votio. have a good time!":"Welcome back to Votio. Have a good time!"
+    },
+    "onboarding":{
+        "welcome to votio":"Welcome to Votio",
+        "welcome to votio description":"Votio is a platform where you can create elections and share them with orthers. You can also vote on elections that are shared with you.",
+        "sign up":"Sign up",
+        "sign in":"Sign in",
+        "vote":"Vote",
+        "dont have an account":"Don't have an account?"
+    }
+}

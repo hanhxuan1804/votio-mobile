@@ -6,74 +6,50 @@ import {
   TextInput,
   Image,
 } from 'react-native';
+import i18n from '../../services/i18n';
 import React, {useState} from 'react';
 import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const languages = {
-  en: {
-    email: 'Email',
-    password: 'Password',
-    login: 'Login',
-    or: 'or',
-    google: 'Google',
-    facebook: 'Facebook',
-    dontHaveAccount: "Don't have an account?",
-    signUp: 'Sign up',
-    helloWelcomeBack: 'Hello Welcome Back',
-    welcomeBackToVotio: 'Welcome back to Votio. Have a good time',
-    pleaseSignInAgain: 'Please sign in again',
-  },
-  vi: {
-    email: 'Email',
-    password: 'Mật khẩu',
-    login: 'Đăng nhập',
-    or: 'hoặc',
-    google: 'Google',
-    facebook: 'Facebook',
-    dontHaveAccount: 'Chưa có tài khoản?',
-    signUp: 'Đăng ký',
-    helloWelcomeBack: 'Xin chào, Chào mừng trở lại',
-    welcomeBackToVotio:
-      'Chào mừng trở lại Votio. Chúc bạn có thời gian tốt lành',
-    pleaseSignInAgain: 'Vui lòng đăng nhập lại',
-  },
-};
+import {useTranslation} from 'react-i18next';
 
 const LoginScreen = ({navigation}) => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
-  const [language, setLanguage] = useState('en');
+  const {t} = useTranslation('translation', {keyPrefix: 'login'});
 
-  // Use the selected language to access the correct translations
-  const t = key => languages[language][key];
-
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.info}>
         <View style={styles.infotop}>
           <TouchableOpacity
             style={styles.backbutton}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.pop()}>
             <FontAwesome5Icons name="angle-left" size={20} color="white" />
           </TouchableOpacity>
           <Text style={styles.logintext}>{t('login')}</Text>
           <TouchableOpacity
             style={styles.languagebutton}
             onPress={() => {
-              language === 'en' ? setLanguage('vi') : setLanguage('en');
+              i18n.language === 'en'
+                ? changeLanguage('vi')
+                : changeLanguage('en');
             }}>
             <Text style={styles.logintext}>
-              {language === 'en' ? 'EN' : 'VI'}
+              {i18n.language === 'en' ? 'EN' : 'VI'}
             </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.infobottom}>
-          <Text style={styles.heading}>{t('helloWelcomeBack')}</Text>
-          <Text style={styles.title}>{t('welcomeBackToVotio')}</Text>
-          <Text style={styles.title}>{t('pleaseSignInAgain')}</Text>
+          <Text style={styles.heading}>{t('hello welcome back')}</Text>
+          <Text style={styles.title}>
+            {t('welcome back to votio. have a good time!')}
+          </Text>
+          <Text style={styles.title}>{t('please login to your account')}</Text>
         </View>
       </View>
       <View style={styles.form}>
@@ -120,16 +96,16 @@ const LoginScreen = ({navigation}) => {
         </View>
         <TouchableOpacity style={styles.sociallogin}>
           <Image source={require('../../assets/images/google.png')} />
-          <Text style={styles.sociallogintext}>{t('google')}</Text>
+          <Text style={styles.sociallogintext}>Google</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sociallogin}>
           <Image source={require('../../assets/images/facebook.png')} />
-          <Text style={styles.sociallogintext}>{t('facebook')}</Text>
+          <Text style={styles.sociallogintext}>Facebook</Text>
         </TouchableOpacity>
         <View style={styles.linkcontainer}>
-          <Text style={styles.title}>{t('dontHaveAccount')}</Text>
+          <Text style={styles.title}>{t('dont have an account')}</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.linktext}>{t('signUp')}</Text>
+            <Text style={styles.linktext}>{t('sign up')}</Text>
           </TouchableOpacity>
         </View>
       </View>

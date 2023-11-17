@@ -8,7 +8,11 @@
         "dont have an account": "Chưa có tài khoản?",
         "hello welcome back": "Chào mừng trở lại!",
         "please login to your account": "Vui lòng đăng nhập vào tài khoản của bạn",
-        "welcome back to votio. have a good time!": "Chào mừng trở lại với votio"
+        "welcome back to votio. have a good time!": "Chào mừng trở lại với votio",
+        "email is required":"Vui lòng nhập email",
+        "email is invalid":"Vui lòng nhập email hợp lệ",
+        "password is required":"Vui lòng nhập mật khẩu",
+        "password must be at least 6 characters": "Mật khẩu phải có ít nhất 6 kí tự"
     },
     "onboarding":{
         "welcome to votio": "Chào mừng đến với votio",
@@ -17,5 +21,22 @@
         "sign in":"Đăng nhập",
         "vote":"Bình chọn",
         "dont have an account":"Chưa có tài khoản?"
+    },
+    "register":{
+        "register":"Đăng ký",
+        "name":"Tên",
+        "email":"Email",
+        "password":"Mật khẩu",
+        "confirm password":"Xác nhận mật khẩu",
+        "already have an account": "Đã có tài khoản?",
+        "sign in": "Đăng nhập",
+        "welcome to votio":"Chào mừng đến với votio",
+        "votio description":"Votio là một nền tảng cho bạn tạo ra bầu cử và bầu cho ứng cử viên của bạn.\nHãy tạo một tài khoản và bắt đầu!",
+        "email is required":"Vui lòng nhập email",
+        "email is invalid":"Vui lòng nhập email hợp lệ",
+        "password is required":"Vui lòng nhập mật khẩu",
+        "password must be at least 6 characters": "Mật khẩu phải có ít nhất 6 kí tự",
+        "name is required":"Vui lòng nhập tên",
+        "password does not match":"Mật khẩu không trùng khớp"
     }
 }

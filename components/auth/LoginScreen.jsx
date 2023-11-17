@@ -5,23 +5,89 @@ import {
   View,
   TextInput,
   Image,
+  Keyboard,
 } from 'react-native';
 import i18n from '../../services/i18n';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTranslation} from 'react-i18next';
+const errors = {
+  'Email is required': {
+    code: '001',
+    message: 'email is required',
+  },
+  'Password is required': {
+    code: '002',
+    message: 'password is required',
+  },
+  'Email is invalid': {
+    code: '003',
+    message: 'email is invalid',
+  },
+  'Password must be at least 6 characters': {
+    code: '004',
+    message: 'password must be at least 6 characters',
+  },
+};
 
 const LoginScreen = ({navigation}) => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
+  const [error, setError] = useState(null);
   const {t} = useTranslation('translation', {keyPrefix: 'login'});
+  const [keyBoard, setKeyBoard] = useState(false);
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyBoard(true);
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyBoard(false);
+      },
+    );
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
   };
+  const formValidation = () => {
+    setError(null);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (form.email.length === 0) {
+      setError(errors['Email is required']);
+      return false;
+    }
+    if (form.password.length === 0) {
+      setError(errors['Password is required']);
+      return false;
+    }
+    if (!emailRegex.test(form.email)) {
+      setError(errors['Email is invalid']);
+      return false;
+    }
+    if (form.password.length < 6) {
+      setError(errors['Password must be at least 6 characters']);
+      return false;
+    }
+    return true;
+  };
+  const handleLogin = () => {
+    if (formValidation()) {
+      alert('Login success');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.info}>
@@ -65,7 +131,12 @@ const LoginScreen = ({navigation}) => {
             placeholder={t('email')}
             placeholderTextColor={'white'}
             value={form.email}
-            onChangeText={text => setForm({...form, email: text})}
+            onChangeText={text => {
+              setForm({...form, email: text});
+              if (error && (error.code === '001' || error.code === '003')) {
+                setError(null);
+              }
+            }}
           />
         </View>
         <View style={styles.inputbox}>
@@ -81,27 +152,37 @@ const LoginScreen = ({navigation}) => {
             placeholder={t('password')}
             placeholderTextColor={'white'}
             value={form.password}
-            onChangeText={text => setForm({...form, password: text})}
+            onChangeText={text => {
+              setForm({...form, password: text});
+              if (error && (error.code === '002' || error.code === '004')) {
+                setError(null);
+              }
+            }}
           />
         </View>
+        {error && <Text style={styles.errortext}>{t(error.message)}</Text>}
         <TouchableOpacity
           style={styles.loginbutton}
-          onPress={() => navigation.navigate('Home')}>
+          onPress={() => handleLogin()}>
           <Text style={styles.buttontext}>{t('login')}</Text>
         </TouchableOpacity>
-        <View style={styles.devider}>
-          <View style={styles.deviderline} />
-          <Text style={styles.devidertext}>{t('or')}</Text>
-          <View style={styles.deviderline} />
-        </View>
-        <TouchableOpacity style={styles.sociallogin}>
-          <Image source={require('../../assets/images/google.png')} />
-          <Text style={styles.sociallogintext}>Google</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.sociallogin}>
-          <Image source={require('../../assets/images/facebook.png')} />
-          <Text style={styles.sociallogintext}>Facebook</Text>
-        </TouchableOpacity>
+        {!keyBoard && (
+          <>
+            <View style={styles.devider}>
+              <View style={styles.deviderline} />
+              <Text style={styles.devidertext}>{t('or')}</Text>
+              <View style={styles.deviderline} />
+            </View>
+            <TouchableOpacity style={styles.sociallogin}>
+              <Image source={require('../../assets/images/google.png')} />
+              <Text style={styles.sociallogintext}>Google</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.sociallogin}>
+              <Image source={require('../../assets/images/facebook.png')} />
+              <Text style={styles.sociallogintext}>Facebook</Text>
+            </TouchableOpacity>
+          </>
+        )}
         <View style={styles.linkcontainer}>
           <Text style={styles.title}>{t('dont have an account')}</Text>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
@@ -254,5 +335,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 10,
     paddingHorizontal: 10,
+  },
+  errortext: {
+    color: 'red',
+    fontSize: 14,
+    textAlign: 'center',
+    paddingVertical: 10,
   },
 });

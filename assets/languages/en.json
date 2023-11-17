@@ -8,7 +8,11 @@
         "sign up":"Sign up",
         "hello welcome back":"Hello, welcome back!",
         "please login to your account":"Please login to your account.",
-        "welcome back to votio. have a good time!":"Welcome back to Votio. Have a good time!"
+        "welcome back to votio. have a good time!":"Welcome back to Votio. Have a good time!",
+        "email is required":"Email is required",
+        "email is invalid":"Email is invalid",
+        "password is required":"Password is required",
+        "password must be at least 6 characters":"Password must be at least 6 characters"
     },
     "onboarding":{
         "welcome to votio":"Welcome to Votio",
@@ -17,5 +21,22 @@
         "sign in":"Sign in",
         "vote":"Vote",
         "dont have an account":"Don't have an account?"
+    },
+    "register":{
+        "register":"Register",
+        "name":"Name",
+        "email":"Email",
+        "password":"Password",
+        "confirm password":"Confirm password",
+        "already have an account":"Already have an account?",
+        "sign in":"Sign in",
+        "welcome to votio":"Welcome to Votio",
+        "votio description":"Votio is a platform for you to create election and vote for your candidate.\nLet create an account and start!",
+        "email is required":"Email is required",
+        "email is invalid":"Email is invalid",
+        "password is required":"Password is required",
+        "password must be at least 6 characters":"Password must be at least 6 characters",
+        "name is required":"Name is required",
+        "password does not match":"Password does not match"        
     }
 }

@@ -2,7 +2,11 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../components/HomeScreen';
-import {LoginScreen, OnboardingScreen} from '../components/auth';
+import {
+  LoginScreen,
+  OnboardingScreen,
+  RegisterScreen,
+} from '../components/auth';
 
 const Stack = createNativeStackNavigator();
 const App = () => {
@@ -18,6 +22,11 @@ const App = () => {
           name="Login"
           options={{headerShown: false}}
           component={LoginScreen}
+        />
+        <Stack.Screen
+          name="Register"
+          options={{headerShown: false}}
+          component={RegisterScreen}
         />
         <Stack.Screen
           name="Home"

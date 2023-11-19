@@ -11,7 +11,8 @@ import React, {useEffect, useState} from 'react';
 import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTranslation} from 'react-i18next';
-
+import {useDispatch} from 'react-redux';
+import {settingsActions} from '../../store';
 const errors = {
   'Email is required': {
     code: '001',
@@ -49,6 +50,7 @@ const RegisterScreen = ({navigation}) => {
   const [error, setError] = useState(null);
   const {t} = useTranslation('translation', {keyPrefix: 'register'});
   const [keyBoard, setKeyBoard] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -70,6 +72,7 @@ const RegisterScreen = ({navigation}) => {
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
+    dispatch(settingsActions.setLanguage(lng));
   };
   const formValidation = () => {
     setError(null);
@@ -124,12 +127,12 @@ const RegisterScreen = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </View>
-        {!keyBoard && (
-          <View style={styles.infobottom}>
-            <Text style={styles.heading}>{t('welcome to votio')}</Text>
+        <View style={styles.infobottom}>
+          <Text style={styles.heading}>{t('welcome to votio')}</Text>
+          {!keyBoard && (
             <Text style={styles.title}>{t('votio description')}</Text>
-          </View>
-        )}
+          )}
+        </View>
       </View>
       <View style={styles.form}>
         <View style={styles.inputbox}>

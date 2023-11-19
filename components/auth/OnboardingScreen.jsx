@@ -1,12 +1,16 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import OnboardMainImg from '../../assets/svg2jsx/OnboardMainImg';
 import i18n from '../../services/i18n';
 import {useTranslation} from 'react-i18next';
+import {settingsActions} from '../../store';
+import {useDispatch} from 'react-redux';
 
 const OnboardingScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
+    dispatch(settingsActions.setLanguage(lng));
   };
   const {t} = useTranslation('translation', {keyPrefix: 'onboarding'});
   return (
@@ -139,5 +143,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 10,
     paddingHorizontal: 10,
+  },
+  title: {
+    color: '#6E819A',
+    fontSize: 14,
   },
 });

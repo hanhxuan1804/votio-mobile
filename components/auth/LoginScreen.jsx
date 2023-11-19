@@ -12,6 +12,8 @@ import React, {useEffect, useState} from 'react';
 import FontAwesome5Icons from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTranslation} from 'react-i18next';
+import {useDispatch} from 'react-redux';
+import {settingsActions} from '../../store';
 const errors = {
   'Email is required': {
     code: '001',
@@ -39,6 +41,7 @@ const LoginScreen = ({navigation}) => {
   const [error, setError] = useState(null);
   const {t} = useTranslation('translation', {keyPrefix: 'login'});
   const [keyBoard, setKeyBoard] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -60,6 +63,7 @@ const LoginScreen = ({navigation}) => {
 
   const changeLanguage = lng => {
     i18n.changeLanguage(lng);
+    dispatch(settingsActions.setLanguage(lng));
   };
   const formValidation = () => {
     setError(null);
